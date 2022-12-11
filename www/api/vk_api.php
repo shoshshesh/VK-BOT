@@ -2,6 +2,8 @@
 
 const VK_API_VERSION = '5.131'; //Используемая версия API
 const VK_API_ENDPOINT = 'https://api.vk.com/method/';
+const INT32_MIN = -2147483648;
+const INT32_MAX = 2147483647;
 
 /**
  * @throws Exception
@@ -69,6 +71,7 @@ function vkApi_docsSave($file, $title) {
 function _vkApi_call($method, $params = array()) {
     $params['access_token'] = VK_API_ACCESS_TOKEN;
     $params['v'] = VK_API_VERSION;
+    $params['random_id'] = random_int(INT32_MIN, INT32_MAX);
 
     $query = http_build_query($params);
     $url = VK_API_ENDPOINT.$method.'?'.$query;

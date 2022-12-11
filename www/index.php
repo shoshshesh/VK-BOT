@@ -1,7 +1,7 @@
 <?php
 
-define('CALLBACK_API_EVENT_CONFIRMATION', 'confirmation');
-define('CALLBACK_API_EVENT_MESSAGE_NEW', 'message_new');
+const CALLBACK_API_EVENT_CONFIRMATION = 'confirmation';
+const CALLBACK_API_EVENT_MESSAGE_NEW = 'message_new';
 
 require_once 'config.php';
 require_once 'global.php';
@@ -9,6 +9,10 @@ require_once 'global.php';
 require_once 'api/vk_api.php';
 
 require_once 'bot/bot.php';
+require_once 'bot/handler/help_handler.php';
+require_once 'bot/handler/hello_handle.php';
+
+
 
 if (!isset($_REQUEST)) {
     exit;
@@ -54,8 +58,17 @@ function _callback_handleConfirmation() {
  * @throws Exception
  */
 function _callback_handleMessageNew($data) {
-    $user_id = $data['message']['from_id'];
-    bot_sendMessage($user_id);
+    $message = $data['message'];
+    $user_id = $message['from_id'];
+    $text = strtolower(trim($message['text']));
+    switch ($text) {
+        case 'привет':
+            handle_hello($user_id);
+            break;
+        default:
+            handle_help($user_id);
+            break;
+    }
     _callback_okResponse();
 }
 

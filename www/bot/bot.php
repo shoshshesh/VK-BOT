@@ -1,13 +1,9 @@
 <?php
 
+//require_once '/api/vk_api.php';
 /**
  * @throws Exception
  */
-function bot_sendMessage($user_id) {
-    $users_get_response = vkApi_usersGet($user_id);
-    $user = array_pop($users_get_response);
-    $msg = "Привет, {$user['first_name']}!";
-//    $attachments = array();
-
-    vkApi_messagesSend($user_id, $msg);
+function bot_sendMessage($user_id, $message, $attachments = array()) {
+    vkApi_messagesSend($user_id, $message, $attachments);
 }

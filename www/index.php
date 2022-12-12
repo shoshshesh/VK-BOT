@@ -10,14 +10,16 @@ require_once 'api/vk_api.php';
 
 require_once 'bot/bot.php';
 require_once 'bot/handler/help_handler.php';
-require_once 'bot/handler/hello_handle.php';
-
+require_once 'bot/handler/hello_handler.php';
+require_once 'bot/handler/default_handler.php';
+require_once 'bot/router.php';
 
 
 if (!isset($_REQUEST)) {
     exit;
 }
 
+mb_internal_encoding('UTF-8');
 callback_handleEvent();
 
 function callback_handleEvent() {
@@ -58,17 +60,7 @@ function _callback_handleConfirmation() {
  * @throws Exception
  */
 function _callback_handleMessageNew($data) {
-    $message = $data['message'];
-    $user_id = $message['from_id'];
-    $text = strtolower(trim($message['text']));
-    switch ($text) {
-        case 'привет':
-            handle_hello($user_id);
-            break;
-        default:
-            handle_help($user_id);
-            break;
-    }
+    route($data);
     _callback_okResponse();
 }
 

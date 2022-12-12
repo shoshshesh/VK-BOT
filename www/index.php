@@ -12,6 +12,7 @@ require_once 'bot/bot.php';
 require_once 'bot/handler/help_handler.php';
 require_once 'bot/handler/hello_handler.php';
 require_once 'bot/handler/default_handler.php';
+require_once 'bot/handler/success_session_handler.php';
 require_once 'bot/router.php';
 
 

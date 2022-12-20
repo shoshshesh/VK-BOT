@@ -19,50 +19,11 @@ function vkApi_messagesSend($peer_id, $message, $attachments = array()) {
 /**
  * @throws Exception
  */
-function vkApi_usersGet($user_id) {
-    return _vkApi_call('users.get', array(
+function vkApi_userGet($user_id) {
+    $users =  _vkApi_call('users.get', array(
         'user_id' => $user_id,
     ));
-}
-
-/**
- * @throws Exception
- */
-function vkApi_photosGetMessagesUploadServer($peer_id) {
-    return _vkApi_call('photos.getMessagesUploadServer', array(
-        'peer_id' => $peer_id,
-    ));
-}
-
-/**
- * @throws Exception
- */
-function vkApi_photosSaveMessagesPhoto($photo, $server, $hash) {
-    return _vkApi_call('photos.saveMessagesPhoto', array(
-        'photo'  => $photo,
-        'server' => $server,
-        'hash'   => $hash,
-    ));
-}
-
-/**
- * @throws Exception
- */
-function vkApi_docsGetMessagesUploadServer($peer_id, $type) {
-    return _vkApi_call('docs.getMessagesUploadServer', array(
-        'peer_id' => $peer_id,
-        'type'    => $type,
-    ));
-}
-
-/**
- * @throws Exception
- */
-function vkApi_docsSave($file, $title) {
-    return _vkApi_call('docs.save', array(
-        'file'  => $file,
-        'title' => $title,
-    ));
+    return array_pop($users);
 }
 
 /**

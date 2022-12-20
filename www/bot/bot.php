@@ -1,6 +1,5 @@
 <?php
 
-//require_once '/api/vk_api.php';
 /**
  * @throws Exception
  */

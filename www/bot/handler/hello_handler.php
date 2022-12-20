@@ -4,8 +4,7 @@
  * @throws Exception
  */
 function hello($user_id) {
-    $users_get_response = vkApi_usersGet($user_id);
-    $user = array_pop($users_get_response);
-    $message = "Привет, {$user['first_name']}!";
+    $user = vkApi_userGet($user_id);
+    $message = "Привет, {$user['first_name']}!\n Удачи на занятиях 😉";
     bot_sendMessage($user_id, $message);
 }

@@ -5,15 +5,14 @@ const CALLBACK_API_EVENT_MESSAGE_NEW = 'message_new';
 
 require_once 'config.php';
 require_once 'global.php';
-
+require_once '../db/database.php';
 require_once 'api/vk_api.php';
-
-require_once 'bot/bot.php';
-require_once 'bot/handler/help_handler.php';
-require_once 'bot/handler/hello_handler.php';
-require_once 'bot/handler/default_handler.php';
-require_once 'bot/handler/success_session_handler.php';
 require_once 'bot/router.php';
+require_once 'bot/validator.php';
+require_once 'entity/User.php';
+require_once 'entity/Lesson.php';
+require_once 'entity/Exam.php';
+require_once 'bot/bot.php';
 
 
 if (!isset($_REQUEST)) {
@@ -39,7 +38,7 @@ function callback_handleEvent() {
                 break;
 
             default:
-                _callback_response('Unsupported event');
+                _callback_response('Unsupported event: ' . $event['type']);
                 break;
         }
     } catch (Exception $e) {

@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS "lesson" (
 	    "id"          BIGSERIAL   PRIMARY KEY,
 	    "user_id"     BIGINT      REFERENCES "user" ("vk_id") ON DELETE CASCADE,
 	    "name"        VARCHAR(20) NOT NULL,
-	    "day_of_week" NUMERIC     NOT NULL,
+	    "day_of_week" INT         NOT NULL,
 	    "time"        TIME        NOT NULL,
 	    "room"        VARCHAR(20) NOT NULL,
 	    "type"        VARCHAR(20) NOT NULL,

@@ -56,32 +56,3 @@ function _vkApi_call($method, $params = array()) {
 
     return $response['response'];
 }
-
-/**
- * @throws Exception
- */
-function vkApi_upload($url, $file_name) {
-    if (!file_exists($file_name)) {
-        throw new Exception('File not found: '.$file_name);
-    }
-
-    $curl = curl_init($url);
-    curl_setopt($curl, CURLOPT_POST, true);
-    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($curl, CURLOPT_POSTFIELDS, array('file' => new CURLfile($file_name)));
-    $json = curl_exec($curl);
-    $error = curl_error($curl);
-    if ($error) {
-        log_error($error);
-        throw new Exception("Failed {$url} request");
-    }
-
-    curl_close($curl);
-
-    $response = json_decode($json, true);
-    if (!$response) {
-        throw new Exception("Invalid response for {$url} request");
-    }
-
-    return $response;
-}
